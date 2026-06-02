@@ -29,7 +29,7 @@ const PaymentReceiveView = ({handleComponentChange, handleReceiptSelect}) => {
         handleReceiptSelect(receipt_no);
     }
 
-    console.log(paymentReceiveDetails)
+    // console.log(paymentReceiveDetails)
 
 
     const columns = [
