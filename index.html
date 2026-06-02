@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--favicon-->
+  <link rel="icon" href="./images/favicon.ico" type="image/png" />
+  <!--plugins-->
+	<link href="./plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="./plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="./plugins/metismenu/css/metisMenu.min.css" rel="stylesheet"/>
+  <!-- Bootstrap CSS -->
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	<link href="./css/bootstrap-extended.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
+	<link href="./css/app.css" rel="stylesheet">
+	<link href="./css/icons.css" rel="stylesheet">
+  <!-- Theme Style CSS -->
+  <link rel="stylesheet" href="./css/dark-theme.css"/>
+  <link rel="stylesheet" href="./css/semi-dark.css"/>
+  <link rel="stylesheet" href="./css/header-colors.css"/>
+  <title>IIF Fusion</title>
+</head>
+
+<body class="bg-theme bg-theme1">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  
+  <!-- Keep only essential libraries that aren't converted yet -->
+	<script src="./plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	
+	<!-- Initialize Perfect Scrollbar globally for any remaining components -->
+	<script>
+		// Make PerfectScrollbar available globally for React components
+		window.PerfectScrollbar = PerfectScrollbar;
+	</script>
+</body>
+
+</html>

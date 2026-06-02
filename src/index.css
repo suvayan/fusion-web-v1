@@ -1,0 +1,725 @@
+#root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+/** -----------------------------------------------** 
+**        Page Header Container start              ** 
+**-------------------------------------------------**/
+.page-header {
+  padding-bottom: 10px;
+}
+
+.page-header-icon {
+  font-size: 20px;
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.page-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+}
+/** -----------------------------------------------** 
+**        Page Header Container end                ** 
+**-------------------------------------------------**/
+
+
+
+
+/** -----------------------------------------------** 
+**        Corm card Container start                ** 
+**-------------------------------------------------**/
+
+.form-card {
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+  transition: all 0.25s ease;
+}
+
+.form-card:hover {
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.form-card-title {
+  font-size: 16px;
+  color: #111827;
+}
+
+.form-card-sub-title {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+@media (max-width: 767px) {
+  .form-card .card-body {
+    padding: 1.5rem !important;
+  }
+}
+
+/** -----------------------------------------------** 
+**        Corm card Container end                  ** 
+**-------------------------------------------------**/
+
+
+
+
+/** -----------------------------------------------** 
+**             Button Style start                  ** 
+**-------------------------------------------------**/
+.btn {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 10px !important;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1.2;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    filter 0.25s ease;
+}
+
+/* subtle shine effect */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 45%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.18) 55%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  left: 140%;
+}
+
+/* universal hover */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+  filter: brightness(1.02);
+}
+
+/* click effect */
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  filter: brightness(0.98);
+}
+
+/* keyboard accessibility */
+.btn:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(13, 110, 253, 0.18),
+    0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* disabled */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.btn:disabled::before,
+.btn.disabled::before {
+  display: none;
+}
+
+/* =========================
+   VARIANTS
+========================= */
+
+/* PRIMARY */
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #0d6efd, #4da3ff);
+  border: 1px solid transparent;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0b5ed7, #3385ff);
+}
+
+/* SECONDARY */
+.btn-secondary {
+  color: #fff;
+  background: linear-gradient(135deg, #6c757d, #8f98a1);
+  border: 1px solid transparent;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #5c636a, #7d868f);
+}
+
+/* SUCCESS */
+.btn-success {
+  color: #fff;
+  background: linear-gradient(135deg, #198754, #36c486);
+  border: 1px solid transparent;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #157347, #2fb877);
+}
+
+/* DANGER */
+.btn-danger {
+  color: #fff;
+  background: linear-gradient(135deg, #dc3545, #ff6b78);
+  border: 1px solid transparent;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #bb2d3b, #ff4d5e);
+}
+
+/* WARNING */
+.btn-warning {
+  color: #212529;
+  background: linear-gradient(135deg, #ffc107, #ffd75e);
+  border: 1px solid transparent;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #e0a800, #ffcc33);
+}
+
+/* INFO */
+.btn-info {
+  color: #fff;
+  background: linear-gradient(135deg, #0dcaf0, #63e2ff);
+  border: 1px solid transparent;
+}
+
+.btn-info:hover {
+  background: linear-gradient(135deg, #0bb5d3, #47d8fb);
+}
+
+/* LIGHT */
+.btn-light {
+  color: #333;
+  background: linear-gradient(135deg, #ffffff, #f5f7fb);
+  border: 1px solid #dbe2ea;
+}
+
+.btn-light:hover {
+  background: linear-gradient(135deg, #f8fafc, #edf2f7);
+  border-color: #cfd8e3;
+}
+
+/* DARK */
+.btn-dark {
+  color: #fff;
+  background: linear-gradient(135deg, #212529, #3a3f44);
+  border: 1px solid transparent;
+}
+
+.btn-dark:hover {
+  background: linear-gradient(135deg, #1a1e21, #2f3439);
+}
+/** -----------------------------------------------** 
+**             Button Style end                    ** 
+**-------------------------------------------------**/
+
+.main-page {
+  padding: 2rem;
+}
+
+.table thead th {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #6c757d;
+}
+
+.table tbody td {
+  font-size: var(--fs-body);
+}
+
+.card {
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+
+/** -----------------------------------------------** 
+**             Inputs Style end                    ** 
+**-------------------------------------------------**/
+
+/* ========= Wrapper ========= */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+/* ========= Label ========= */
+.form-title-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #344054;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-required {
+  color: #d92d20;
+  font-weight: 700;
+}
+
+/* ========= Input Wrapper ========= */
+.form-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ========= Input ========= */
+.form-input,
+.form-control {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #101828;
+  padding: 0 42px 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+  outline: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+
+/* Placeholder */
+.form-input::placeholder,
+.form-control::placeholder {
+  color: #98a2b3;
+}
+
+/* Hover */
+.form-input:hover:not(:disabled):not([readonly]),
+.form-control:hover:not(:disabled):not([readonly]) {
+  border-color: #b8c1cc;
+}
+
+/* Focus */
+.form-input:focus,
+.form-control:focus {
+  border-color: #1570ef;
+  box-shadow:
+    0 0 0 4px rgba(21, 112, 239, 0.12),
+    0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+/* Error */
+.form-input.is-error,
+.form-control.is-error {
+  border-color: #f04438;
+}
+
+.form-input.is-error:focus,
+.form-control.is-error:focus {
+  box-shadow:
+    0 0 0 4px rgba(240, 68, 56, 0.12),
+    0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+/* Disabled */
+.form-input:disabled,
+.form-control:disabled {
+  background: #f9fafb;
+  color: #98a2b3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Read only */
+.form-input[readonly],
+.form-control[readonly] {
+  background: #fcfcfd;
+  color: #475467;
+}
+
+/* ========= Clear Button ========= */
+.form-clear-btn {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  color: #98a2b3;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  z-index: 3;
+}
+
+.form-clear-btn:hover {
+  background: #f2f4f7;
+  color: #667085;
+}
+
+.form-clear-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 112, 239, 0.18);
+}
+
+/* ========= Messages ========= */
+.form-error {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #d92d20;
+  font-weight: 500;
+}
+
+.form-hint {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #667085;
+}
+
+/* ========= Select ========= */
+.form-select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+/* Dropdown icon */
+.form-select-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #98a2b3;
+  pointer-events: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hover effect */
+.form-input-wrapper:hover .form-select-icon {
+  color: #667085;
+}
+
+/* Disabled */
+.form-select:disabled {
+  cursor: not-allowed;
+}
+
+.form-select:disabled + .form-select-icon {
+  color: #cbd2d9;
+}
+
+/* ========= Custom searchable dropdown ========= */
+.form-datalist-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 24px rgba(16, 24, 40, 0.12),
+    0 2px 8px rgba(16, 24, 40, 0.08);
+  z-index: 9999;
+  padding: 6px;
+  margin: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+.form-datalist-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #101828;
+  background: #ffffff;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.form-datalist-option:hover,
+.form-datalist-option.active {
+  background: #f2f4f7;
+  color: #101828;
+}
+
+.form-datalist-option-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #101828;
+}
+
+.form-datalist-option-value {
+  font-size: 12px;
+  color: #667085;
+}
+
+.form-datalist-empty {
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #667085;
+}
+
+.form-input.has-clear {
+  padding-right: 42px;
+}
+
+/* optional scrollbar style */
+.form-datalist-menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form-datalist-menu::-webkit-scrollbar-thumb {
+  background: #d0d5dd;
+  border-radius: 999px;
+}
+
+.form-datalist-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ========= DatePicker Full Width ========= */
+.date-picker-full,
+.date-picker-full.react-datepicker-wrapper {
+  width: 100%;
+  display: block;
+}
+
+.date-picker-full .react-datepicker__input-container,
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.date-picker-full input,
+.react-datepicker__input-container input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Optional date icon support */
+.form-date-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #98a2b3;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.form-input.has-icon,
+.form-control.has-icon {
+  padding-left: 40px;
+}
+
+/* If both icon + clear button are used */
+.form-input.has-icon.has-clear,
+.form-control.has-icon.has-clear {
+  padding-left: 40px;
+  padding-right: 42px;
+}
+
+/* ========= Checkbox / Radio Group ========= */
+
+/* Fieldset reset */
+.form-fieldset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  min-width: 0;
+}
+
+.form-legend {
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+/* Group layout */
+.form-check-group {
+  display: flex;
+  flex-direction: column; /* default vertical */
+  gap: 12px;
+  width: 100%;
+}
+
+/* Horizontal layout */
+.form-check-group.inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 24px;
+}
+
+/* Each checkbox/radio option */
+.form-check-option {
+  display: inline-flex;
+  align-items: flex-start; /* use center if you never have description */
+  gap: 10px;
+  cursor: pointer;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Full width options for column layout */
+.form-check-group:not(.inline) .form-check-option {
+  width: 100%;
+}
+
+/* Input control */
+.form-check-input {
+  margin: 0;
+  margin-top: 2px; /* aligns input better with label text */
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+  accent-color: #1570ef;
+}
+
+/* Checkbox / radio specific classes */
+.form-checkbox,
+.form-radio {
+  accent-color: #1570ef;
+}
+
+/* Error state */
+.form-check-input.is-error,
+.form-checkbox.is-error,
+.form-radio.is-error {
+  accent-color: #f04438;
+}
+
+/* Text wrapper */
+.form-check-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* Main label text */
+.form-check-label {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #344054;
+}
+
+/* Description below label */
+.form-check-description {
+  font-size: 12px;
+  line-height: 1.4;
+  color: #667085;
+}
+
+/* Disabled state */
+.form-check-option.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-check-option.is-disabled .form-check-input {
+  cursor: not-allowed;
+}
+
+/* Focus visible for accessibility */
+.form-check-input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 112, 239, 0.18);
+  border-radius: 4px;
+}
+
+/* Optional: hover effect on label area */
+.form-check-option:hover .form-check-label {
+  color: #101828;
+}
+
+/* Optional: better spacing in row mode */
+.form-check-group.inline .form-check-option {
+  width: auto;
+}

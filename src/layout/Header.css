@@ -1,0 +1,187 @@
+/* Header Component Styles - Professional UI Upgrade */
+
+.header-user-dropdown {
+  position: relative;
+}
+
+/* Dropdown Menu */
+.header-user-dropdown .dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  transform: none;
+  margin-top: 0;
+  min-width: 260px;
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+  z-index: 1000;
+  animation: dropdownFade 0.22s ease;
+}
+
+/* Small dropdown appearance animation */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* User Trigger Avatar */
+.header-user-dropdown .user-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* User Initial Letter */
+.header-user-dropdown .user-initials {
+  color: white;
+  font-weight: 700;
+  font-size: var(--fs-header-dropdown-item);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+/* Profile Header inside Dropdown */
+.header-user-dropdown .user-profile-header {
+  padding: 1.25rem 1rem 1rem;
+  border-bottom: 1px solid #edf2f7;
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e293b 100%);
+  color: white;
+  text-align: center;
+}
+
+/* Larger Avatar */
+.header-user-dropdown .user-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  margin: 0 auto 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* User Name */
+.header-user-dropdown .user-name {
+  font-size: var(--fs-header-user-name);
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+/* User Role / Subtitle */
+.header-user-dropdown .user-role {
+  font-size: var(--fs-header-user-role);
+  opacity: 0.88;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Menu section spacing */
+.header-user-dropdown .user-menu-section {
+  padding: 0.4rem 0;
+  background: #ffffff;
+}
+
+/* Dropdown Items */
+.header-user-dropdown .dropdown-item {
+  padding: 0.85rem 1.1rem;
+  font-size: var(--fs-header-dropdown-item);
+  font-weight: 500;
+  color: #334155;
+  background: transparent;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: none;
+  text-decoration: none;
+}
+
+/* Item icons */
+.header-user-dropdown .dropdown-item i {
+  width: 18px;
+  text-align: center;
+  font-size: var(--fs-header-icon);
+  color: #64748b;
+  transition: color 0.2s ease;
+}
+
+/* Hover State */
+.header-user-dropdown .dropdown-item:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  transform: translateX(3px);
+}
+
+.header-user-dropdown .dropdown-item:hover i {
+  color: #2563eb;
+}
+
+/* Active / Focus State */
+.header-user-dropdown .dropdown-item:focus,
+.header-user-dropdown .dropdown-item:active {
+  background: #eff6ff;
+  color: #1d4ed8;
+  outline: none;
+}
+
+/* Divider */
+.header-user-dropdown .dropdown-divider {
+  margin: 0.35rem 0;
+  border-top: 1px solid #edf2f7;
+}
+
+/* Logout item highlight */
+.header-user-dropdown .dropdown-item.text-danger,
+.header-user-dropdown .dropdown-item.logout-item {
+  color: #dc2626;
+}
+
+.header-user-dropdown .dropdown-item.text-danger i,
+.header-user-dropdown .dropdown-item.logout-item i {
+  color: #dc2626;
+}
+
+.header-user-dropdown .dropdown-item.text-danger:hover,
+.header-user-dropdown .dropdown-item.logout-item:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .header-user-dropdown .dropdown-menu {
+    min-width: 220px;
+    right: -10px;
+  }
+
+  .header-user-dropdown .dropdown-item {
+    padding: 0.8rem 1rem;
+  }
+
+  .header-user-dropdown .user-profile-header {
+    padding: 1rem 0.9rem 0.9rem;
+  }
+}

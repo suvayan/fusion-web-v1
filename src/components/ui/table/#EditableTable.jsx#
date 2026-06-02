@@ -1,0 +1,361 @@
+import { forwardRef, useImperativeHandle, useState } from "react";
+import { Button } from "../button/Button";
+import { InputField, SelectField } from "../inputs/InputFields";
+import {Trash, Check, Pencil} from "lucide-react";
+
+/* -------------------- Helpers -------------------- */
+
+const createEmptyRow = (columns = []) => {
+    const row = {};
+
+    columns.forEach((col) => {
+        row[col.accessor] = col.defaultValue !== undefined
+            ? col.defaultValue
+            : col.type === "select"
+                ? ""
+                : "";
+    });
+    return row;
+};
+
+const validateRow = (row, columns = []) => {
+    const errors = {};
+
+    columns.forEach((col) => {
+        const value = row?.[col.accessor];
+        const isRequired = col.required ?? false;
+
+        if (!isRequired) return;
+
+        if (col.type === "select") {
+            if (!value || value === "-1") {
+                errors[col.accessor] = `${col.name} is required`;
+            }
+        } else {
+            if (value === undefined || value === null || value.toString().trim() === "") {
+                errors[col.accessor] = `${col.name} is required`;
+            }
+        }
+    });
+
+    return errors;
+};
+
+const getDisplayValue = (col, value, row) => {
+    if (typeof col.render === "function") {
+        return col.render(value, row);
+    }
+
+    if (col.type === "select") {
+        const option = col.options?.find((o) => o.value === value);
+        return option?.label || "-";
+    }
+
+    return value || "-";
+};
+
+/* -------------------- Header -------------------- */
+
+const TableHeader = ({
+    title,
+    subtitle,
+    isAddRow,
+    addButtonText,
+    onAddRow,
+    isEditing
+}) => {
+    return (
+    <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3">
+        <div>
+            {title && <h5 className="mb-1 fw-semibold text-dark">{title}</h5>}
+            {subtitle && <p className="mb-0 text-muted small">{subtitle}</p>}
+        </div>
+
+        {isAddRow && (
+            <Button
+                title={addButtonText || "Add Row"}
+                variant="primary"
+                handleOnClick={onAddRow}
+                className="btn-sm"
+                disabled={isEditing}
+            />
+        )}
+    </div>
+    );
+};
+
+/* -------------------- Table Head -------------------- */
+
+const TableHead = ({ columns = [], isSl, isAction }) => (
+    <thead className="table-light">
+        <tr>
+            {isSl && <th style={{ width: "70px" }}>S.No.</th>}
+            {columns.map((col, i) => (
+                <th key={i} className="fw-semibold text-nowrap">
+                    {col.name}
+                    {col.required && <span className="text-danger ms-1">*</span>}
+                </th>
+            ))}
+            {isAction && <th style={{ width: "180px" }} className="text-center">Actions</th>}
+        </tr>
+    </thead>
+);
+
+/* -------------------- Table Body -------------------- */
+
+const TableBody = ({
+    columns,
+    data,
+    isSl,
+    isAction,
+    editRowIndex,
+    errors,
+    onChange,
+    onEdit,
+    onSave,
+    onDelete,
+    emptyMessage
+}) => {
+    if (!data.length) {
+        return (
+            <tbody>
+                <tr>
+                    <td colSpan={(isSl ? 1 : 0) + columns.length + (isAction ? 1 : 0)} className="text-center text-muted py-4" >
+                        {emptyMessage || "No data available"}
+                    </td>
+                </tr>
+            </tbody>
+        );
+    }
+
+    return (
+        <tbody>
+        {data.map((row, rowIndex) => {
+            const isEditing = editRowIndex === rowIndex;
+
+            return (
+                <tr key={rowIndex}>
+                {isSl && <td className="fw-medium">{rowIndex + 1}</td>}
+
+                {columns.map((col) => (
+                    <td key={col.accessor} className="align-middle">
+                        {isEditing ? (
+                            col.type === "select" ? (
+                                <SelectField
+                                    name={col.accessor}
+                                    value={row[col.accessor]}
+                                    options={col.options || []}
+                                    onChange={(e) => onChange(rowIndex, col.accessor, e.target.value)}
+                                    error={errors?.[rowIndex]?.[col.accessor]}
+                                    className="form-select form-select-sm"
+                                    placeholder={col.placeholder || `Select ${col.name}`}
+                                />
+                            ) : (
+                                <InputField
+                                    name={col.accessor}
+                                    value={row[col.accessor]}
+                                    type={col.type || "text"}
+                                    onChange={(e) => onChange(rowIndex, col.accessor, e.target.value)}
+                                    error={errors?.[rowIndex]?.[col.accessor]}
+                                    className="form-control form-control-sm"
+                                    placeholder={col.placeholder || `Enter ${col.name}`}
+                                />
+                            )
+                        ) : (
+                            <div className="text-dark small">
+                                {getDisplayValue(col, row[col.accessor], row)}
+                            </div>
+                        )}
+                    </td>
+                ))}
+
+                {isAction && (
+                    <td className="text-center align-middle">
+                        <div className="d-flex justify-content-center gap-2 flex-wrap">
+                        {isEditing ? (
+                            <button
+                                type="button"
+                                className="btn btn-sm btn-success"
+                                onClick={() => onSave(rowIndex)}
+                            > Save </button>
+                        ) : (
+                            <button
+                                type="button"
+                                className="btn btn-sm btn-outline-primary"
+                                onClick={() => onEdit(rowIndex)}
+                                disabled={editRowIndex !== null}
+                            >Edit</button>
+                        )}
+
+                            <button
+                                type="button"
+                                className="btn btn-sm btn-outline-danger"
+                                onClick={() => onDelete(rowIndex)}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </td>
+                )}
+                </tr>
+            );
+        })}
+        </tbody>
+    );
+};
+
+/* -------------------- Main Component -------------------- */
+
+const EditableTable = forwardRef((props, ref) => {
+    const {
+        columns = [],
+        data = [],
+        onDataChange,
+        // title,
+        // subtitle,
+        isSl = false,
+        isAction = true,
+        // isAddRow = true,
+        // addButtonText = "Add Row",
+        emptyMessage = "No data available",
+        // cardClassName = "",
+        tableClassName = ""
+    } = props;
+
+    const [tableData, setTableData] = useState(() => data || []);
+    const [editRowIndex, setEditRowIndex] = useState(null);
+    const [errors, setErrors] = useState({});
+
+    const updateData = (newData) => {
+        setTableData(newData);
+        if (typeof onDataChange === "function") {
+            onDataChange(newData);
+        }
+    };
+
+    const handleChange = (rowIndex, field, value) => {
+        const newData = [...tableData];
+        newData[rowIndex] = { ...newData[rowIndex], [field]: value };
+        setTableData(newData);
+
+        if (typeof onDataChange === "function") {
+            onDataChange(newData);
+        }
+
+        setErrors((prev) => ({
+            ...prev,
+            [rowIndex]: {
+                ...prev[rowIndex],
+                [field]: ""
+            }
+        }));
+    };
+
+    const handleEdit = (rowIndex) => {
+        setEditRowIndex(rowIndex);
+        setErrors((prev) => ({ ...prev, [rowIndex]: {} }));
+    };
+
+    const handleSave = (rowIndex) => {
+        const rowErrors = validateRow(tableData[rowIndex], columns);
+        if (Object.keys(rowErrors).length > 0) {
+            setErrors((prev) => ({
+                ...prev,
+                [rowIndex]: rowErrors
+            }));
+            return;
+        }
+        setErrors({});
+        setEditRowIndex(null);
+        updateData([...tableData]);
+    };
+
+    const handleDelete = (rowIndex) => {
+        const newData = tableData.filter((_, i) => i !== rowIndex);
+        setEditRowIndex(null);
+        setErrors({});
+        updateData(newData);
+    };
+
+    const handleAddRow = () => {
+        if (editRowIndex !== null) {
+            const rowErrors = validateRow(tableData[editRowIndex], columns);
+
+            if (Object.keys(rowErrors).length > 0) {
+                setErrors((prev) => ({
+                    ...prev,
+                    [editRowIndex]: rowErrors
+                }));
+                return;
+            }
+        }
+
+        const newRow = createEmptyRow(columns);
+        const newData = [...tableData, newRow];
+
+        setTableData(newData);
+        setEditRowIndex(newData.length - 1);
+        setErrors({});
+    };
+
+    useImperativeHandle(ref, () => ({
+        addRow: handleAddRow,
+        getData: () => tableData,
+        clearErrors: () => setErrors({})
+    }));
+
+    // return (
+    //     <div className={`card shadow-sm border-0 ${cardClassName}`}>
+    //         <div className="card-body">
+    //             <TableHeader
+    //                 title={title}
+    //                 subtitle={subtitle}
+    //                 isAddRow={isAddRow}
+    //                 addButtonText={addButtonText}
+    //                 onAddRow={handleAddRow}
+    //                 isEditing={editRowIndex !== null}
+    //             />
+    //                 <div className="table-responsive">
+    //                     <table className={`table table-bordered table-hover align-middle mb-0 ${tableClassName}`}>
+    //                         <TableHead columns={columns} isSl={isSl} isAction={isAction} />
+    //                         <TableBody
+    //                             columns={columns}
+    //                             data={tableData}
+    //                             isSl={isSl}
+    //                             isAction={isAction}
+    //                             editRowIndex={editRowIndex}
+    //                             errors={errors}
+    //                             onChange={handleChange}
+    //                             onEdit={handleEdit}
+    //                             onSave={handleSave}
+    //                             onDelete={handleDelete}
+    //                             emptyMessage={emptyMessage}
+    //                         />
+    //                     </table>
+    //                 </div>
+    //         </div>
+    //     </div>
+    // );
+    return (
+        <div className="table-responsive">
+            <table className={`table table-bordered align-middle mb-0 ${tableClassName}`}>
+                <TableHead columns={columns} isSl={isSl} isAction={isAction} />
+                <TableBody
+                    columns={columns}
+                    data={tableData}
+                    isSl={isSl}
+                    isAction={isAction}
+                    editRowIndex={editRowIndex}
+                    errors={errors}
+                    onChange={handleChange}
+                    onEdit={handleEdit}
+                    onSave={handleSave}
+                    onDelete={handleDelete}
+                    emptyMessage={emptyMessage}
+                />
+            </table>
+        </div>
+    )
+});
+
+export default EditableTable;
