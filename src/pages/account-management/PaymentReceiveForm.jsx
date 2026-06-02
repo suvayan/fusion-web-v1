@@ -6,7 +6,6 @@ import { Plus, X, Check, Pen } from "lucide-react";
 import { states as statesMaster } from "@/constants/states";
 import FormWrapper from "@/components/page-wrapper/FormWrapper";
 import { Button } from "@/components/ui/button/Button";
-import {formatDateToDDMMYYYY} from "@/utils/utils";
 import {
     InputField,
     TextareaField,
@@ -159,7 +158,7 @@ const fronFields = [
     {
         container: "col-md-6 col-sm-12",
         label: "DD/CHQ/RTGS No",
-        name: "ddNo",
+        name: "ddChqNo",
         type: "text",
         readOnly: false,
         disabled: false,
@@ -170,7 +169,7 @@ const fronFields = [
     {
         container: "col-md-6 col-sm-12",
         label: "DD/CHQ/RTGS Date",
-        name: "ddDate",
+        name: "ddChqDate",
         type: "date",
         readOnly: false,
         disabled: false,
@@ -397,8 +396,8 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
         (fieldName) => {
             const receiveMode = formValues?.receiveMode ?? "";
             const fieldsToDisableForCash = [
-                "ddNo",
-                "ddDate",
+                "ddChqNo",
+                "ddChqDate",
                 "bankName",
                 "branchName",
                 "depositBank",
@@ -492,8 +491,6 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
 
         const payload = {
             ...data,
-            receiptDate: data.receiptDate ? formatDateToDDMMYYYY(data.receiptDate) : "",
-            ddDate: data.ddDate ? formatDateToDDMMYYYY(data.ddDate) : "",
             items: items.map((obj) => {
                 const newObj = { ...obj };
                 delete newObj.action;
@@ -557,11 +554,11 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
                         <Controller
                             name={fronField.name}
                             control={control}
-                            // rules={
-                            //     isNotValidation(fronField.name)
-                            //         ? {}
-                            //         : (fronField?.rules ?? {})
-                            // }
+                            rules={
+                                isNotValidation(fronField.name)
+                                    ? {}
+                                    : (fronField?.rules ?? {})
+                            }
                             render={({ field, fieldState }) => {
                                 const fieldsToDisableForCash = [
                                     "ddNo",
