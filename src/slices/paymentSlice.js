@@ -164,6 +164,10 @@ export const createProformaInvoice = createAsyncThunk(
 // initial state for payment receive slice
 
 const initialState = {
+  apiCallStatus: false,
+  submitStatus: false,
+  isLoading: false,
+
   paymentViewStatus: "idle",
   paymentReceiveStatus: "idle",
   paymentReceiveError: null,
@@ -192,18 +196,6 @@ const paymentSlice = createSlice({
   },
   extraReducers: (builder) => {
   builder
-    .addCase(createPaymentReceive.pending, (state) => {
-      state.paymentReceiveStatus = "loading";
-      state.paymentReceiveError = null;
-    })
-    .addCase(createPaymentReceive.fulfilled, (state) => {
-      state.paymentReceiveStatus = "succeeded";
-    })
-    .addCase(createPaymentReceive.rejected, (state, action) => {
-      state.paymentReceiveStatus = "failed";
-      state.paymentReceiveError = action.payload;
-    })
-
     .addCase(fetchPaymentReceiveDetails.pending, (state) => {
       state.paymentViewStatus = "loading";
       state.paymentReceiveError = null;
