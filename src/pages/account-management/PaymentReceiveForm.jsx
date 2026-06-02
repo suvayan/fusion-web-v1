@@ -284,7 +284,7 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
     () => [
       {
         name: "Department",
-        accessor: "ri_concern_dept",
+        accessor: "department",
         type: "select",
         options:
           concernDepartments?.map((dept) => ({
@@ -294,12 +294,12 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
       },
       {
         name: "Received Amount",
-        accessor: "ri_amount",
+        accessor: "receivedAmount",
         type: "number",
       },
       {
         name: "Narration",
-        accessor: "ri_narration",
+        accessor: "narration",
         type: "text",
       },
       {
@@ -467,7 +467,7 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
 
     if (items.length) {
       const sum = items.reduce(
-        (acc, item) => acc + Number(item?.ri_amount || 0),
+        (acc, item) => acc + Number(item?.receivedAmount || 0),
         0
       );
 
