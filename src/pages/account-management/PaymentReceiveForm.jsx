@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { Plus, X, Check, Pen } from "lucide-react";
-
 import { states as statesMaster } from "@/constants/states";
+import {paymentReceivalFields} from "@/constants/fromFieldObject";
 import FormWrapper from "@/components/page-wrapper/FormWrapper";
 import { Button } from "@/components/ui/button/Button";
 import {
@@ -14,7 +14,6 @@ import {
     DateField,
 } from "@/components/ui/inputs/InputFields";
 import EditableTable from "@/components/ui/table/EditableTable";
-
 import {
     fetchCountries,
     fetchDepositBanks,
@@ -25,211 +24,14 @@ import {
     fetchPaymentReceivalById,
     createPaymentReceive,
 } from "@/slices/paymentSlice";
+import {parseDDMMYYYY} from "@/utils/utils.js";
 
-const fronFields = [
-    {
-        container: "col-md-12 col-sm-12",
-        label: "Payee Name",
-        name: "payeeName",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Payee Name is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Email",
-        name: "email",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Email is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Mobile No",
-        name: "mobileNo",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Mobile No is required",
-        },
-    },
-    {
-        container: "col-md-12 col-sm-12",
-        label: "Payee Address",
-        name: "payeeAddress",
-        type: "textarea",
-        rules: {
-            required: "Payee Address is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Country",
-        name: "country",
-        type: "select",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Country is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "State",
-        name: "state",
-        type: "select",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "State is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Pincode",
-        name: "pincode",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Pincode is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Ammount",
-        name: "amount",
-        type: "number",
-        rules: {
-            required: "Ammount is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Currency",
-        name: "currency",
-        type: "select",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Currency is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Receive Mode",
-        name: "receiveMode",
-        type: "select",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Receive Mode is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Bank Name",
-        name: "bankName",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Bank Name is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Branch Name",
-        name: "branchName",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Branch Name is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "DD/CHQ/RTGS No",
-        name: "ddChqNo",
-        type: "text",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "DD/CHQ/RTGS No is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "DD/CHQ/RTGS Date",
-        name: "ddChqDate",
-        type: "date",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "DD/CHQ/RTGS Date is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Deposit Bank",
-        name: "depositBank",
-        type: "select",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Deposit Bank is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Deposit Bank A/C No",
-        name: "depositBankAcNo",
-        type: "select",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Deposit Bank A/C No is required",
-        },
-    },
-    {
-        container: "col-md-12 col-sm-12",
-        label: "Local/Outstation",
-        name: "localOutStation",
-        type: "radio",
-        rules: {
-            required: "Local/Outstation is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Receipt Date",
-        name: "receiptDate",
-        type: "date",
-        readOnly: false,
-        disabled: false,
-        rules: {
-            required: "Receipt Date is required",
-        },
-    },
-    {
-        container: "col-md-6 col-sm-12",
-        label: "Receipt No",
-        name: "receiptNo",
-        type: "text",
-        readOnly: true,
-        disabled: false,
-    },
-];
+console.log("paymentReceivalFields: ", paymentReceivalFields);
 
-const defaultValues = fronFields.reduce((acc, curr) => {
+const fromFields = [...paymentReceivalFields]
+
+
+const defaultValues = fromFields.reduce((acc, curr) => {
     acc[curr.name] = "";
     return acc;
 }, {});
@@ -355,29 +157,23 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
 
     useEffect(() => {
         const bankId = formValues?.depositBank ?? "";
-        setValue("depositBankAcNo", "");
         if (bankId) {
             dispatch(fetchDepositBankAccounts(bankId));
+        }else{
+            setValue("depositBankAcNo", "")
         }
     }, [dispatch, setValue, formValues?.depositBank]);
 
     useEffect(() => {
-        setValue("state", "");
-    }, [setValue, formValues?.country]);
+        if(!formValues?.state){
+            setValue("state", "");
+        }
+    }, [setValue, formValues?.country, formValues?.state]);
 
     useEffect(() => {
         const receiveMode = formValues?.receiveMode ?? "";
-
         if (receiveMode === "Cash") {
-            const fields = [
-                "ddChqNo",
-                "ddChqDate",
-                "bankName",
-                "branchName",
-                "depositBank",
-                "depositBankAcNo",
-            ];
-
+            const fields = ["ddChqNo", "ddChqDate", "bankName", "branchName", "depositBank", "depositBankAcNo"];
             fields.forEach((field) => {
                 setValue(field, "", {
                     shouldValidate: false,
@@ -450,15 +246,24 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
                 bankName: paymentReceiveById?.rh_bank_name ?? "",
                 branchName: paymentReceiveById?.rh_bank_branch ?? "",
                 ddChqNo: paymentReceiveById?.rh_cheq_dd_no ?? "",
-                ddChqDate: paymentReceiveById?.rh_cheq_dd_date ?? "",
+                ddChqDate: parseDDMMYYYY(paymentReceiveById?.rh_cheq_dd_date) ?? "",
                 depositBank: paymentReceiveById?.rh_deposit_bank ?? "",
                 depositBankAcNo: paymentReceiveById?.rh_deposi_ac_no ?? "",
                 localOutStation: paymentReceiveById?.rh_local_outstation ?? "",
-                receiptDate: paymentReceiveById?.rh_receipt_date ?? "",
+                receiptDate: parseDDMMYYYY(paymentReceiveById?.rh_receipt_date) ?? "",
                 receiptNo: paymentReceiveById?.rh_receipt_no ?? "",
-                items: [...(paymentReceiveById?.items ?? [])],
+                items: [...(paymentReceiveById?.items ?? []).map((item)=>({
+                    department: item?.ri_concern_dept ?? "",
+                    receivedAmount: item?.ri_amount ?? 0,
+                    narration: item?.ri_narration ?? ""
+                }))],
             });
+            
+            if (paymentReceiveById?.rh_deposit_bank) {
+                dispatch(fetchDepositBankAccounts(paymentReceiveById.rh_deposit_bank));
+            }
 
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setErr("");
         } else {
             reset({
@@ -466,7 +271,7 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
                 items: [],
             });
         }
-    }, [paymentReceiveById, reset]);
+    }, [dispatch, paymentReceiveById, reset]);
 
     const submitHandler = async (data) => {
         const items = data?.items ?? [];
@@ -549,7 +354,7 @@ const PaymentReceiveForm = ({ title, receiptNo, handleComponentChange }) => {
                 className="row p-3 g-3"
                 onSubmit={handleSubmit(submitHandler)}
             >
-                {fronFields.map((fronField) => (
+                {fromFields.map((fronField) => (
                     <div className={fronField.container} key={fronField.name}>
                         <Controller
                             name={fronField.name}

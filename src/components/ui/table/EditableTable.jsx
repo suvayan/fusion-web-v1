@@ -134,8 +134,10 @@ const EditableTable = forwardRef((props, ref) => {
     if (editRowIndex !== null) return;
 
     if (Array.isArray(data)) {
+      const dataStr = JSON.stringify(data);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTableData((prev) => {
-        if (JSON.stringify(prev) === JSON.stringify(data)) {
+        if (JSON.stringify(prev) === dataStr) {
           return prev;
         }
         return data;

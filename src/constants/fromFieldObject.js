@@ -1,4 +1,4 @@
-export const fromItemObj = {
+export const paymentProcessFieldObj = {
     "New Membership(for Individual/Student/Affiliate)": [
         {
             container: "col-md-6 col-sm-6",
@@ -390,3 +390,207 @@ export const fromItemObj = {
     "Renew Membership": [], 
     "Member To Industry Membership": []
 }
+
+
+export const paymentReceivalFields = [
+    {
+        container: "col-md-12 col-sm-12",
+        label: "Payee Name",
+        name: "payeeName",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Payee Name is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Email",
+        name: "email",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Email is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Mobile No",
+        name: "mobileNo",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Mobile No is required",
+        },
+    },
+    {
+        container: "col-md-12 col-sm-12",
+        label: "Payee Address",
+        name: "payeeAddress",
+        type: "textarea",
+        rules: {
+            required: "Payee Address is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Country",
+        name: "country",
+        type: "select",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Country is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "State",
+        name: "state",
+        type: "select",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "State is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Pincode",
+        name: "pincode",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Pincode is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Ammount",
+        name: "amount",
+        type: "number",
+        rules: {
+            required: "Ammount is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Currency",
+        name: "currency",
+        type: "select",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Currency is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Receive Mode",
+        name: "receiveMode",
+        type: "select",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Receive Mode is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Bank Name",
+        name: "bankName",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Bank Name is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Branch Name",
+        name: "branchName",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Branch Name is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "DD/CHQ/RTGS No",
+        name: "ddChqNo",
+        type: "text",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "DD/CHQ/RTGS No is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "DD/CHQ/RTGS Date",
+        name: "ddChqDate",
+        type: "date",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "DD/CHQ/RTGS Date is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Deposit Bank",
+        name: "depositBank",
+        type: "select",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Deposit Bank is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Deposit Bank A/C No",
+        name: "depositBankAcNo",
+        type: "select",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Deposit Bank A/C No is required",
+        },
+    },
+    {
+        container: "col-md-12 col-sm-12",
+        label: "Local/Outstation",
+        name: "localOutStation",
+        type: "radio",
+        rules: {
+            required: "Local/Outstation is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Receipt Date",
+        name: "receiptDate",
+        type: "date",
+        readOnly: false,
+        disabled: false,
+        rules: {
+            required: "Receipt Date is required",
+        },
+    },
+    {
+        container: "col-md-6 col-sm-12",
+        label: "Receipt No",
+        name: "receiptNo",
+        type: "text",
+        readOnly: true,
+        disabled: false,
+    },
+];

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { X } from "lucide-react";
@@ -429,11 +430,12 @@ export const RadioGroupField = ({
                 </div>
             </fieldset>
 
-            {error ? (
+            {error && (
                 <span className="form-error">{error}</span>
-            ) : hint ? (
+            )} 
+            {hint && (
                 <span className="form-hint">{hint}</span>
-            ) : null}
+            )}
         </div>
     );
 };

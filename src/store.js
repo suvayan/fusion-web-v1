@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // localStorage for web
 
+import baseReducer from "./slices/baseSlice";
 import authReducer from "./slices/authSlice";
 import userReducer from "./slices/userSlice";
 import paymentReducer from "./slices/paymentSlice";
@@ -27,6 +28,7 @@ const authPersistConfig = {
 // Only wrap auth with persistReducer
 const rootReducer = combineReducers({
     auth: persistReducer(authPersistConfig, authReducer),
+    base: baseReducer,
     user: userReducer, // NOT persisted
     payment: paymentReducer, // NOT persisted
     common: commonReducer, // NOT persisted

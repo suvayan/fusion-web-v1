@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {useSelector, useDispatch} from "react-redux";
-import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import authServices from "@/services/authServices";
 import AuthLayoutWrapper from "@/components/page-wrapper/AuthLayoutWrapper";
 // import { InputBox, Button } from "@/components/inputs/AuthComponents";
@@ -15,21 +13,12 @@ const Login = () => {
     const location = useLocation();
     // dispatch
     const dispatch = useDispatch();
-    // user state from redux store
-    // const {loading} = useSelector(state => state.auth);
 
     // Get the page user was trying to access before login
     const from = location.state?.from?.pathname || "/";
 
-    const {register, handleSubmit, formState: { errors }} = useForm({
-        defaultValues: {
-            userid: "",
-            password: ""
-        }
-    })
-    const [showPassword, setShowPassword] = useState(false);
 
-
+    // eslint-disable-next-line no-unused-vars
     const signInHandler = async (data) => {
         try{
             dispatch(loadingToggling(true));

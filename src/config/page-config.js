@@ -9,6 +9,7 @@ const Dashboard  = lazy(()=>import("@/pages/Dashboard"));
 const EditMember = lazy(()=>import("@/pages/membership-management/EditMember"));
 const EditIndMember = lazy(()=>import("@/pages/membership-management/EditIndMember"));
 const CancelMembership = lazy(()=>import("@/pages/membership-management/CancelMembership"));
+const ConvertFellowMember = lazy(()=>import("@/pages/membership-management/ConvertFellowMember"));
 
 // Account Mamagement
 const PaymentReceive = lazy(()=>import("@/pages/account-management/PaymentReceive"));
@@ -62,6 +63,7 @@ export const pagesConfig = [
             { id: "edit-member", title: "Edit Member", icon: "bx bx-radio-circle", path: "/membership-management/edit-member", component: EditMember, isPrivate: true, },
             { id: "edit-ind-member", title: "Edit IND Member", icon: "bx bx-radio-circle", path: "/membership-management/edit-ind-member", component: EditIndMember, isPrivate: true, },
             { id: "cancel-membership", title: "Cancel Membership", icon: "bx bx-radio-circle", path: "/membership-management/cancel-membership", component: CancelMembership, isPrivate: true, },
+            { id: "convert-fellow-member", title: "Convert Fellow Member", icon: "bx bx-radio-circle", path: "/membership-management/convert-fellow-member", component: ConvertFellowMember, isPrivate: true, },
         ]
     }
 ];

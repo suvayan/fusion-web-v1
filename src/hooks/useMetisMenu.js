@@ -63,9 +63,10 @@ export const useMetisMenu = (menuItems = []) => {
             processMenuItems(menuItems, newActiveMenus, newExpandedMenus)
         }
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setActiveMenus(newActiveMenus)
         setExpandedMenus(newExpandedMenus)
-    }, [location.pathname, menuItems, processMenuItems, setActiveMenus, setExpandedMenus])
+    }, [location.pathname, menuItems])  // eslint-disable-line react-hooks/exhaustive-deps
 
     // Helper function to find parent menu ID
     const findParentMenuId = useCallback((menuId, items = menuItems) => {

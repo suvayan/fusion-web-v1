@@ -33,6 +33,7 @@ const PaymentProcess = () => {
     
     useEffect(() => {
         if (paymentReceiveDetails?.length) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setTableData(
                 paymentReceiveDetails.map((r, idx) => ({
                     ...r, rowId: idx,
@@ -100,6 +101,7 @@ const PaymentProcess = () => {
     }
 
     useEffect(()=>{
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setInfo((prev)=>({
             ...prev,
             processAmmount: 0,
