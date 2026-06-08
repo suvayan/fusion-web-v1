@@ -7,7 +7,7 @@ import {useSelector, useDispatch} from "react-redux";
 import { InputField, TextareaField, SelectField, RadioGroupField, InputBox, DateField } from "@/components/ui/inputs/InputFields";
 import { paymentProcessFieldObj } from "@/constants/fromFieldObject";
 import {fetchCountries, getNationality, getAllState, getDispatchModes, getPostalCodes, getRegions, getChapters, getMembershipClass} from "@/slices/commonSlice.js";
-import {getReceiptPayeeDetails, getMemberCategories} from "@/slices/paymentProcessSlice.js";
+import {getReceiptPayeeDetails, getMemberCategories, createNewMember} from "@/slices/paymentProcessSlice.js";
 
 
 const PaymentProcessForm = ({title, selectedRow, setPageView}) => {
@@ -88,7 +88,7 @@ const PaymentProcessForm = ({title, selectedRow, setPageView}) => {
 
     const submitHandler = (data) => {
         if(title === "New Membership(for Individual/Student/Affiliate)"){
-            console.log(data)
+            dispatch(createNewMember(data))
         }
         console.log(data)
     }

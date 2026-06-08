@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {InputField, TextareaField, SelectField, CheckBox, CheckBoxGroup, RadioGroup, DateField} from "@/components/ui/input-fields";
 import Button from "@/components/ui/button";
 
-const MemberShipForm = forwardRef(({ 
+const AccountManagementForm = forwardRef(({ 
     formFields, defaultValues, 
     optionsGetter= () => [], autoFormChangeCallHandler, 
     formSubmitHandler
@@ -182,7 +182,7 @@ export const formFieldPropType = PropTypes.shape({
     addOns: PropTypes.string,
 });
 
-MemberShipForm.PropTypes = {
+AccountManagementForm.PropTypes = {
     formFields: PropTypes.arrayOf(formFieldPropType).isRequired,
     defaultValues: PropTypes.objectOf(
         PropTypes.oneOfType([
@@ -198,4 +198,4 @@ MemberShipForm.PropTypes = {
     formSubmitHandler: PropTypes.func
 }
 
-export default MemberShipForm;
+export default AccountManagementForm;

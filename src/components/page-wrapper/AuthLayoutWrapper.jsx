@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const AuthLayoutWrapper = ({ title, subtitle, children }) => {
     return (
         <div className="wrapper" style={{ minHeight: '100vh' }}>
@@ -23,5 +25,13 @@ const AuthLayoutWrapper = ({ title, subtitle, children }) => {
         </div>
     )
 }
+
+
+AuthLayoutWrapper.propTypes = {
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  children: PropTypes.node,
+};
+
 
 export default AuthLayoutWrapper;

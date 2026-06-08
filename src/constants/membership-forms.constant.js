@@ -1,15 +1,11 @@
 export const membership = [
     {
         container: "col-md-4 col-sm-12",
-        label: "Membership ID", name: "membershipId", type: "text",
-        readOnly: false, disabled: false,
-    },
-    {
-        container: "col-md-4 col-sm-12",
         label: "Membership No.", name: "membershipNo", type: "text",
         readOnly: true, disabled: false,
     },
     {container: "col-md-4 col-sm-12", name: "_", type: null },
+    {container: "col-md-4 col-sm-12", name: "_0", type: null },
     {
         container: "col-md-4 col-sm-12",
         label: "First Name", name: "firstName", type: "text",
@@ -23,7 +19,6 @@ export const membership = [
     {
         container: "col-md-4 col-sm-12",
         label: "Last Name", name: "lastName", type: "text",
-        placeholder: "Enter Last Name",
         readOnly: false, disabled: false,
     },
     {
@@ -169,15 +164,11 @@ export const membership = [
 export const memberIndship = [
     {
         container: "col-md-4 col-sm-12",
-        label: "Membership ID", name: "membershipId", type: "text",
-        readOnly: false, disabled: false,
-    },
-    {
-        container: "col-md-4 col-sm-12",
         label: "Membership No.", name: "membershipNo", type: "text",
         readOnly: true, disabled: false,
     },
     {container: "col-md-4 col-sm-12", name: "_", type: null },
+    {container: "col-md-4 col-sm-12", name: "_0", type: null },
     {
         container: "col-md-4 col-sm-12",
         label: "First Name", name: "firstName", type: "text",
@@ -191,7 +182,6 @@ export const memberIndship = [
     {
         container: "col-md-4 col-sm-12",
         label: "Last Name", name: "lastName", type: "text",
-        placeholder: "Enter Last Name",
         readOnly: false, disabled: false,
     },
     {
@@ -201,7 +191,7 @@ export const memberIndship = [
     },
     {
         container: "col-md-4 col-sm-12",
-        label: "Date of Establishment:", name: "dateOfEst", type: "date",
+        label: "Date of Establishment:", name: "dateOfBirth", type: "date",
         readOnly: false, disabled: false,
     },
     {container: "col-md-4 col-sm-12", name: "_1", type: null },
@@ -220,7 +210,7 @@ export const memberIndship = [
         label: "Chapter", name: "chapter", type: "select",
         readOnly: false, disabled: false,
     },
-        {
+    {
         container: "col-md-4 col-sm-12",
         label: "Nationality", name: "nationality", type: "select",
         readOnly: false, disabled: false,
@@ -287,7 +277,7 @@ export const memberIndship = [
     },
     {
         container: "col-md-4 col-sm-12",
-        label: "Status", name: "status", type: "select",
+        label: "Status", name: "status", type: "radioGroup",
         readOnly: false, disabled: false,
     },
     {container: "col-md-4 col-sm-12", name: "_5", type: null },
@@ -336,4 +326,77 @@ export const cancelMembership = [
         label: "Membership No", name: "membershipNo", type: "text",
         readOnly: false, disabled: false,
     },
+]
+
+export const convertMembership = [
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Membership Class", name: "membershipClass", type: "select",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Nationality", name: "nationality", type: "select",
+        readOnly: false, disabled: false,
+    },
+    {container: "col-md-4 col-sm-12", name: "_2", type: null },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Region", name: "region", type: "select",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Chapter", name: "chapter", type: "select",
+        readOnly: false, disabled: false,
+    },
+    {container: "col-md-4 col-sm-12", name: "_3", type: null },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "First Name", name: "firstName", type: "text",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Middle Name", name: "middleName", type: "text",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Last Name", name: "lastName", type: "text",
+        readOnly: false, disabled: false,
+    }
+]
+
+export const newFellowMembership = [
+    {
+        container: "col-md-4 col-sm-12",
+        label: "First Name", name: "firstName", type: "text",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Middle Name", name: "middleName", type: "text",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Last Name", name: "lastName", type: "text",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "Country", name: "country", type: "select",
+        readOnly: false, disabled: false,
+    },
+    {
+        container: "col-md-4 col-sm-12",
+        label: "State", name: "state", type: "select",
+        readOnly: false, disabled: false,
+    }, 
+    {
+        container: "col-md-4 col-sm-12",
+        label: "State Code", name: "stateCode", type: "text",
+        readOnly: false, disabled: false,
+    },  
 ]

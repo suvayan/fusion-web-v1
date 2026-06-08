@@ -1,20 +1,28 @@
-import {useEffect, useCallback, useRef, useMemo} from "react";
+import {useState, useEffect, useCallback, useRef, useMemo} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import MainLayoutWrapper from "@/components/page-wrapper/MainLayoutWrapper";
 import MemberShipForm from "./membership-form";
 import {resetPageLoader} from "@/slices/baseSlice";
 import { states as statesMaster } from "@/constants/states";
-import {memberIndship} from "@/constants/membership-forms.constant";
+import {addressType} from "@/constants/common.constant";
+import {membership} from "@/constants/membership-forms.constant";
+import FormWrapper from "@/components/page-wrapper/FormWrapper";
 import {
     getPostalCodes, fetchCountries, 
     getMembershipClass, getRegions,
     getNationality, getChapters,
     getDispatchModes, setStateByCounrty
 } from "@/slices/commonSlice";
+import {getMembershipDetails, resetMembershipDetails} from "@/slices/membershipSlice";
+import useDebounce from "@/hooks/useDebounce";
+import {InputField} from "@/components/ui/input-fields";
 
-const EditIndMember = () => {
+const EditMember = () => {
     const editMemberRef = useRef(null);
+    const [membershipId, setMembershipId] = useState("");
+    const debounceMembershipId = useDebounce(membershipId, 500);
     const dispatch = useDispatch();
+    const {membershipDetails} = useSelector((state) => state.membership);
     const {
         countries, postalCods, 
         memberShipClasses, regions,
@@ -23,11 +31,11 @@ const EditIndMember = () => {
     } = useSelector((state) => state.common);
 
     const defaultValues = useMemo(()=> ({
-        ...(memberIndship || []).filter((item)=> !item.name.startsWith("_")).reduce((acc, curr) => {
-            acc[curr.name] = "";
+        ...(membership || []).filter((item)=> !item.name.startsWith("_")).reduce((acc, curr) => {
+            acc[curr.name] = membershipDetails?.[curr.name] ?? "";
             return acc;
         }, {})
-    }), [])
+    }), [membershipDetails])
 
 
     const optionsGetter = useCallback((fieldName)=>{
@@ -66,9 +74,9 @@ const EditIndMember = () => {
                 label: item.dm_description, value: item.dm_id
             }))
         }
-        if(fieldName === "industryCat"){
-            return ["IT", "Manufacturing", "Construction"].map((item) => ({
-                label: item, value: item.toLocaleLowerCase()
+        if(fieldName === "addressType"){
+            return addressType.map((item) => ({
+                label: item.label, value: item.value
             }))
         }
         if(fieldName === "status"){
@@ -115,22 +123,51 @@ const EditIndMember = () => {
             }
             
         }
-
         fetchCombo()
     }, [dispatch])
 
+
+    useEffect(()=>{
+        if(debounceMembershipId){
+            dispatch(getMembershipDetails({"imm_id": debounceMembershipId}))
+        }
+    },[dispatch, debounceMembershipId])
+
+    useEffect(()=>{
+        dispatch(resetMembershipDetails());
+    }, [dispatch])
+
+
+    const formSubmitHandler = (data) => {
+        console.log(data);
+    }
+
+
     return (
         <MainLayoutWrapper title="Edit Member">
-            <MemberShipForm
-                ref={editMemberRef}
-                title="Edit Indian Membership Form"
-                formFields={[...memberIndship]}
-                defaultValues={{...defaultValues}}
-                optionsGetter={optionsGetter}
-                autoFormChangeCallHandler={autoFormChangeCallHandler}
-            />
+            <FormWrapper title="Edit Member Form">
+                <div className="row p-3 g-3">
+                    <div className="col-md-4 col-sm-12">
+                        <InputField 
+                            label="Membership ID"
+                            type="text"
+                            value={membershipId}
+                            onChange={(e)=>setMembershipId(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <MemberShipForm
+                    ref={editMemberRef}
+                    title="Edit Member Form"
+                    formFields={[...membership]}
+                    defaultValues={{...defaultValues}}
+                    optionsGetter={optionsGetter}
+                    autoFormChangeCallHandler={autoFormChangeCallHandler}
+                    formSubmitHandler={formSubmitHandler}
+                />
+            </FormWrapper>
         </MainLayoutWrapper>
     )
 }
 
-export default EditIndMember;
+export default EditMember;

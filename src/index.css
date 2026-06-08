@@ -729,3 +729,16 @@
 .form-check-group.inline .form-check-option {
   width: auto;
 }
+
+
+
+.page-loader{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

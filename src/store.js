@@ -18,6 +18,7 @@ import userReducer from "./slices/userSlice";
 import paymentReducer from "./slices/paymentSlice";
 import commonReducer from "./slices/commonSlice";
 import paymentProcessReducer from "./slices/paymentProcessSlice";
+import membershipReducer from "./slices/membershipSlice";
 
 // Persist config only for the auth slice
 const authPersistConfig = {
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
     user: userReducer, // NOT persisted
     payment: paymentReducer, // NOT persisted
     common: commonReducer, // NOT persisted
-    paymentProcess: paymentProcessReducer //NOT persisted
+    paymentProcess: paymentProcessReducer, //NOT persisted
+    membership: membershipReducer, //NOT persisted 
 });
 
 export const store = configureStore({

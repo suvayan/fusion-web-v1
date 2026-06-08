@@ -1,25 +1,23 @@
 import { lazy } from "react";
 
-const Login = lazy(()=>import("@/pages/auth/Login"));
-const ForgotPassword = lazy(() => import("@/pages/auth/ForgotPassword"));
+const Login = lazy(()=>import("@/pages/auth/login"));
+const ForgotPassword = lazy(() => import("@/pages/auth/forgot-password"));
 
 const Dashboard  = lazy(()=>import("@/pages/Dashboard"));
 
 // Membership Management
-const EditMember = lazy(()=>import("@/pages/membership-management/EditMember"));
-const EditIndMember = lazy(()=>import("@/pages/membership-management/EditIndMember"));
-const CancelMembership = lazy(()=>import("@/pages/membership-management/CancelMembership"));
-const ConvertFellowMember = lazy(()=>import("@/pages/membership-management/ConvertFellowMember"));
+const EditMember = lazy(()=>import("@/pages/membership-management/edit-member"));
+const EditIndMember = lazy(()=>import("@/pages/membership-management/edit-ind-member"));
+const CancelMembership = lazy(()=>import("@/pages/membership-management/cancel-membership"));
+const ConvertFellowMember = lazy(()=>import("@/pages/membership-management/convert-ellow-member"));
+const NewFellowMembership = lazy(()=>import("@/pages/membership-management/new-fellow-membership"));
 
 // Account Mamagement
-const PaymentReceive = lazy(()=>import("@/pages/account-management/PaymentReceive"));
+const PaymentReceive = lazy(()=>import("@/pages/account-management/payment-receive"));
 const PaymentProcess = lazy(()=>import("@/pages/account-management/PaymentProcess"));
 const ModifyReceipt = lazy(()=>import("@/pages/account-management/ModifyReceipt"));
 const ViewProformaInvoice = lazy(()=>import("@/pages/account-management/ViewProformaInvoice"));
 const CreateProformaInvoice = lazy(()=>import("@/pages/account-management/CreateProformaInvoice"));
-const ViewGSTInvoice = lazy(()=>import("@/pages/account-management/ViewGSTInvoice"));
-const InterestCalculation = lazy(()=>import("@/pages/account-management/InterestCalculation"));
-const AdvertisementProcess = lazy(()=>import("@/pages/account-management/AdvertisementProcess"));
 
 
 // Auth pages
@@ -44,14 +42,36 @@ export const pagesConfig = [
         icon: "bx bx-wallet icon-account",
         path: "/account-management",
         children: [
-            { id: "payment-receive", title: "Payment Receive", icon: "bx bx-radio-circle", path: "/account-management/payment-receive", component: PaymentReceive, isPrivate: true, },
-            { id: "modify-receipt", title: "Modify Receipt", icon: "bx bx-radio-circle", path: "/account-management/modify-receipt", component: ModifyReceipt, isPrivate: true, },
-            { id: "payment-process", title: "Payment Process (New)", icon: "bx bx-radio-circle", path: "/account-management/payment-process", component: PaymentProcess, isPrivate: true, },
-            // { id: "advertisement-process", title: "Advertisement Process (WR)", icon: "bx bx-radio-circle", path: "/account-management/advertisement-process", component: AdvertisementProcess, isPrivate: true, },
-            { id: "create-proforma-invoice", title: "Create Proforma Invoice", icon: "bx bx-radio-circle", path: "/account-management/create-proforma-invoice", component: CreateProformaInvoice, isPrivate: true, },
-            { id: "view-proforma-invoice", title: "View Proforma Invoice", icon: "bx bx-radio-circle", path: "/account-management/view-proforma-invoice", component: ViewProformaInvoice, isPrivate: true, },
-            // { id: "view-gst-invoice", title: "View GST Invoice", icon: "bx bx-radio-circle", path: "/account-management/view-gst-invoice", component: ViewGSTInvoice, isPrivate: true, },
-            // { id: "interest-calculation", title: "InterestCalculation", icon: "bx bx-radio-circle", path: "/account-management/interest-calculation", component: InterestCalculation, isPrivate: true, }
+            { 
+                id: "payment-receive", title: "Payment Receive", 
+                icon: "bx bx-radio-circle", 
+                path: "/account-management/payment-receive", 
+                component: PaymentReceive, isPrivate: true, 
+            },
+            { 
+                id: "modify-receipt", title: "Modify Receipt", 
+                icon: "bx bx-radio-circle", 
+                path: "/account-management/modify-receipt", 
+                component: ModifyReceipt, isPrivate: true, 
+            },
+            { 
+                id: "payment-process", title: "Payment Process (New)", 
+                icon: "bx bx-radio-circle", 
+                path: "/account-management/payment-process", 
+                component: PaymentProcess, isPrivate: true, 
+            },
+            { 
+                id: "create-proforma-invoice", title: "Create Proforma Invoice", 
+                icon: "bx bx-radio-circle", path: "/account-management/create-proforma-invoice", 
+                component: CreateProformaInvoice, isPrivate: true, 
+            },
+            { 
+                id: "view-proforma-invoice", title: "View Proforma Invoice", 
+                icon: "bx bx-radio-circle", 
+                path: "/account-management/view-proforma-invoice", 
+                component: ViewProformaInvoice, isPrivate: true, 
+            },
+           
         ]
     },
     {
@@ -60,10 +80,33 @@ export const pagesConfig = [
         icon: "bx bx-id-card icon-membership",
         path: "/membership-management",
         children: [
-            { id: "edit-member", title: "Edit Member", icon: "bx bx-radio-circle", path: "/membership-management/edit-member", component: EditMember, isPrivate: true, },
-            { id: "edit-ind-member", title: "Edit IND Member", icon: "bx bx-radio-circle", path: "/membership-management/edit-ind-member", component: EditIndMember, isPrivate: true, },
-            { id: "cancel-membership", title: "Cancel Membership", icon: "bx bx-radio-circle", path: "/membership-management/cancel-membership", component: CancelMembership, isPrivate: true, },
-            { id: "convert-fellow-member", title: "Convert Fellow Member", icon: "bx bx-radio-circle", path: "/membership-management/convert-fellow-member", component: ConvertFellowMember, isPrivate: true, },
+            { 
+                id: "edit-member", title: "Edit Member Details", 
+                icon: "bx bx-radio-circle", path: "/membership-management/edit-member", 
+                component: EditMember, isPrivate: true, 
+            },
+            { 
+                id: "edit-ind-member", title: "Edit Ind. Member Details", 
+                icon: "bx bx-radio-circle", path: "/membership-management/edit-ind-member", 
+                component: EditIndMember, isPrivate: true, 
+            },
+            { 
+                id: "cancel-membership", title: "Cancel Membership", 
+                icon: "bx bx-radio-circle", 
+                path: "/membership-management/cancel-membership", 
+                component: CancelMembership, isPrivate: true, 
+            },
+            { 
+                id: "convert-fellow-member", title: "Convert Fellow Member", 
+                icon: "bx bx-radio-circle", 
+                path: "/membership-management/convert-fellow-member", 
+                component: ConvertFellowMember, isPrivate: true, 
+            },
+            { 
+                id: "new-fellow-member", title: "New Fellow Member", 
+                icon: "bx bx-radio-circle", path: "/membership-management/new-fellow-membership", 
+                component: NewFellowMembership, isPrivate: true, 
+            },
         ]
     }
 ];
