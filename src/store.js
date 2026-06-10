@@ -12,11 +12,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // localStorage for web
 
+import baseReducer from "./slices/baseSlice";
 import authReducer from "./slices/authSlice";
 import userReducer from "./slices/userSlice";
 import paymentReducer from "./slices/paymentSlice";
 import commonReducer from "./slices/commonSlice";
 import paymentProcessReducer from "./slices/paymentProcessSlice";
+import membershipReducer from "./slices/membershipSlice";
 
 // Persist config only for the auth slice
 const authPersistConfig = {
@@ -27,10 +29,12 @@ const authPersistConfig = {
 // Only wrap auth with persistReducer
 const rootReducer = combineReducers({
     auth: persistReducer(authPersistConfig, authReducer),
+    base: baseReducer,
     user: userReducer, // NOT persisted
     payment: paymentReducer, // NOT persisted
     common: commonReducer, // NOT persisted
-    paymentProcess: paymentProcessReducer //NOT persisted
+    paymentProcess: paymentProcessReducer, //NOT persisted
+    membership: membershipReducer, //NOT persisted 
 });
 
 export const store = configureStore({

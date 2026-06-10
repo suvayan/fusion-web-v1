@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {Button} from "@/components/ui/button/Button";
 import DataTable from "@/components/ui/table/DataTable";
 import Pagination from "@/components/ui/pagination/Pagination";
-import { fetchPaymentReceiveDetails } from "@/slices/paymentSlice";
+import { fetchPaymentReceiveDetails, resetPaymentReceiveById } from "@/slices/paymentSlice";
 import {Printer, FilePenLine} from "lucide-react";
 
 const PaymentReceiveView = ({handleComponentChange, handleReceiptSelect}) => {
@@ -13,6 +13,7 @@ const PaymentReceiveView = ({handleComponentChange, handleReceiptSelect}) => {
     const pageSize = 15;
 
     useEffect(() => {
+        dispatch(resetPaymentReceiveById());
         dispatch(fetchPaymentReceiveDetails());
     }, [dispatch]);
 

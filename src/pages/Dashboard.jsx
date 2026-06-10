@@ -26,7 +26,7 @@ const Dashboard = () => {
     {
         key: "actions",
         title: "Actions",
-        render: (_, row) => (
+        render: () => (
           <div className="d-flex gap-2">
             <button className="btn btn-sm btn-primary">Edit</button>
             <button className="btn btn-sm btn-danger">Delete</button>

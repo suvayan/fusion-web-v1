@@ -1,15 +1,16 @@
+import PropTypes from "prop-types";
+
+
 const getVisiblePages = (page, totalPages) => {
     const maxVisible = 3;
-
     if (totalPages <= 0) return [];
-
     let start = Math.max(1, page - 1);
     let end = Math.min(totalPages, start + maxVisible - 1);
-
     start = Math.max(1, end - maxVisible + 1);
-
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 };
+
+
 
 const Pagination = ({
     page,
@@ -79,6 +80,14 @@ const Pagination = ({
             )}
         </div>
     );
-};
+}
+
+Pagination.propTypes = {
+    page: PropTypes.number,
+    pageSize: PropTypes.number,
+    totalPages: PropTypes.number,
+    totalRecords: PropTypes.number,
+    handlePageChange: PropTypes.func
+}
 
 export default Pagination;

@@ -69,6 +69,10 @@ const paymentServices = {
         const response = await httpClient.post(`/account-management/autoloadsubmitcreateproformainvoice`, {...reqBody});
         return response.data;
     },
+    createNewMember: async (reqBody) => {
+        const response = await httpClient.post(`/account-management/create-new-membership`, {...reqBody});
+        return response.data;
+    }
 
 };
 

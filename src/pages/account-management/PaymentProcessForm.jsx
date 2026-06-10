@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button/Button";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import {useSelector, useDispatch} from "react-redux";
 import { InputField, TextareaField, SelectField, RadioGroupField, InputBox, DateField } from "@/components/ui/inputs/InputFields";
-import { fromItemObj } from "@/constants/paymentProcessFields";
+import { paymentProcessFieldObj } from "@/constants/fromFieldObject";
 import {fetchCountries, getNationality, getAllState, getDispatchModes, getPostalCodes, getRegions, getChapters, getMembershipClass} from "@/slices/commonSlice.js";
-import {getReceiptPayeeDetails, getMemberCategories} from "@/slices/paymentProcessSlice.js";
+import {getReceiptPayeeDetails, getMemberCategories, createNewMember} from "@/slices/paymentProcessSlice.js";
 
 
 const PaymentProcessForm = ({title, selectedRow, setPageView}) => {
@@ -25,7 +25,7 @@ const PaymentProcessForm = ({title, selectedRow, setPageView}) => {
         membershipCategories
     } = useSelector((state) => state.paymentProcess);
 
-    const fromFields = useMemo(()=>fromItemObj[title],[title]);
+    const fromFields = useMemo(()=>paymentProcessFieldObj[title],[title]);
 
     const defaultValues = useMemo(()=>fromFields.reduce((acc, curr) => {
         acc[curr.name] = "";
@@ -53,8 +53,18 @@ const PaymentProcessForm = ({title, selectedRow, setPageView}) => {
         dispatch(getMembershipClass())
         dispatch(getMemberCategories())
         dispatch(getReceiptPayeeDetails(receiptNo));
-        setValue("receiptAmt", receiptAmt)
-    },[dispatch, setValue, receiptAmt, receiptNo])
+        setValue("receiptAmt", receiptAmt);
+        
+        if(title === "New Membership(for Individual/Student/Affiliate)"){
+            console.log(title, title === "New Membership(for Individual/Student/Affiliate)");
+            setValue("ind_fore", "Indian");
+            setValue("addressType", "Home");
+            setValue("notification", "Yes");
+        }
+
+    },[title, dispatch, setValue, receiptAmt, receiptNo])
+
+
 
 
 
@@ -77,6 +87,9 @@ const PaymentProcessForm = ({title, selectedRow, setPageView}) => {
 
 
     const submitHandler = (data) => {
+        if(title === "New Membership(for Individual/Student/Affiliate)"){
+            dispatch(createNewMember(data))
+        }
         console.log(data)
     }
 

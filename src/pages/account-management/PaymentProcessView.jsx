@@ -40,7 +40,7 @@ const PaymentProcessView = ({data, page, onPageChange, pageSize, totalRecords, t
                 />
             )
         },
-    ]),[data])
+    ]),[rowCheckHandler, rowInputChangeHandler])
 
 
     return (

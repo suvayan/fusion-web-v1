@@ -41,6 +41,22 @@ export const getMemberCategories = createAsyncThunk(
 )
 
 
+export const createNewMember = createAsyncThunk(
+  "paymentProcess/createNewMember", 
+  async (reqBody, { rejectWithValue }) => {
+    try {
+      const response = await paymentServices.createNewMember(reqBody);
+      if(response.success){
+        showToast.success(response.message)
+      }
+    } catch (error) {
+      showToast.error(error.message);
+      return rejectWithValue(error);
+    }
+  } 
+)
+
+
 const paymentProcessSlice = createSlice({
     name: "paymentProcess",
     initialState,

@@ -191,7 +191,7 @@ export const getChapters = createAsyncThunk(
 
 export const getMembershipClass = createAsyncThunk(
     "common/getMembershipClass",
-    async (region_id, { rejectWithValue }) => {
+    async (_, { rejectWithValue }) => {
         try {
             const response = await commonServices.getMembershipClass();
             return response;
@@ -208,6 +208,7 @@ const initialState = {
     countries: [],
     states: [],
     allStates: [],
+    stateByCountry: [],
     depositBanks: [],
     depositBankAccounts: [],
     concernDepartments: [],
@@ -225,7 +226,11 @@ const initialState = {
 const commonSlice = createSlice({
     name: "common",
     initialState,
-    reducers: {},
+    reducers: {
+        setStateByCounrty: (state, action) => {
+            state.stateByCountry = action.payload ?? []
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCountries.fulfilled, (state, action) => {
@@ -276,4 +281,5 @@ const commonSlice = createSlice({
     }
 });
 
+export const { setStateByCounrty } = commonSlice.actions;
 export default commonSlice.reducer;

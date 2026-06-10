@@ -90,7 +90,7 @@
   font-size: 14px !important;
   font-weight: 500 !important;
   border-radius: 10px !important;
-  padding: 0.5rem 1rem;
+  padding: .575rem .85rem !important;
   border: none;
   outline: none;
   cursor: pointer;
@@ -237,12 +237,12 @@
 /* INFO */
 .btn-info {
   color: #fff;
-  background: linear-gradient(135deg, #0dcaf0, #63e2ff);
+  background: linear-gradient(135deg, #087590, #2f8fa9);
   border: 1px solid transparent;
 }
 
 .btn-info:hover {
-  background: linear-gradient(135deg, #0bb5d3, #47d8fb);
+  background: linear-gradient(135deg, #066b84, #297a8f);
 }
 
 /* LIGHT */
@@ -317,6 +317,10 @@
   gap: 6px;
 }
 
+.error-label {
+  color: #d92d20 !important;
+}
+
 .form-required {
   color: #d92d20;
   font-weight: 700;
@@ -337,7 +341,7 @@
   border-radius: 12px;
   background: #ffffff;
   color: #101828;
-  padding: 0 42px 0 14px;
+  padding: .375rem .75rem;
   font-size: 14px;
   line-height: 1.5;
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
@@ -372,6 +376,8 @@
 }
 
 /* Error */
+.form-check-input.is-error,
+.form-title-label.is-error,
 .form-input.is-error,
 .form-control.is-error {
   border-color: #f04438;
@@ -387,8 +393,8 @@
 /* Disabled */
 .form-input:disabled,
 .form-control:disabled {
-  background: #f9fafb;
-  color: #98a2b3;
+  background: #6b7280;
+  color: #ffffff;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -722,4 +728,17 @@
 /* Optional: better spacing in row mode */
 .form-check-group.inline .form-check-option {
   width: auto;
+}
+
+
+
+.page-loader{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }

@@ -1,4 +1,5 @@
 import { pageIcon } from "@/constants/page-icon";
+import PropTypes from "prop-types";
 
 const MainLayoutWrapper = ({  title, children,}) => {
     const icon = pageIcon?.[title] ?? "bx bx-file";
@@ -30,5 +31,11 @@ const MainLayoutWrapper = ({  title, children,}) => {
         </div>
     )
 }
+
+MainLayoutWrapper.propTypes = {
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  children: PropTypes.node,
+};
+
 
 export default MainLayoutWrapper;

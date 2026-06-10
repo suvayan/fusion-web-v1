@@ -379,10 +379,9 @@ const CreateProformaInvoice = () => {
         }
     }, [dispatch, debouncedCustomerState]);
 
+    // eslint-disable-next-line no-unused-vars
     const resetFields = () => {
-        fromFields.forEach((field)=>{
-            
-        })
+        // TODO: implement field reset
     }
 
     const submitHandler = async (data) => {

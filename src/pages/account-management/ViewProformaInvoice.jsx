@@ -33,7 +33,7 @@ const ViewProformaInvoice = () => {
         {
             key: "actions",
             title: "",
-            render: ({row}) => (
+            render: () => (
                 <div className="d-flex gap-2">
                     <Button 
                         variant="success"
